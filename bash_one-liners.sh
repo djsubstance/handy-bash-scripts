@@ -13,5 +13,6 @@ dumpSrc() ( curl -s 'https://www.view-page-source.com/' -X POST -H 'User-Agent: 
 alias urls=" sed 's/http/\nhttp/g' | grep ^http | sed 's/\(^http[^<]*\)\(.*\)/\1/g'"
 
 
-
-
+# Identify what SSL TLS version is running on the remote hostname
+echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}' | grep -Ev "($(openssl ciphers -v 'ALL:ALL' | grep -Ei "(gcm|pfs)" | grep -Ei "(ec|dhe)" | grep 256 | awk '{print "TLS_"$1}' | tr '-' '_' | tr '\n' '|' | head -c -1))"
+ 

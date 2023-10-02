@@ -1,0 +1,17 @@
+
+             _                   _   
+  __ _ _ __ | |_       __ _  ___| |_ 
+ / _` | '_ \| __|____ / _` |/ _ \ __|
+| (_| | |_) | ||_____| (_| |  __/ |_ 
+ \__,_| .__/ \__|     \__, |\___|\__|
+      |_|             |___/          
+                  ESSENTiALS (UBUNTU / DEBIAN BASED OS)
+
+09/23/2023 - These are some of my core apt-get essentials:
+alias ag="apt-get -y install "
+ag isc-dhcp-server  # If you plan on running DHCP server
+ag sslstrip usbutils ettercap-text-only  ettercap-common  ettercap-dbg tshark
+ag exiftool # This tool extracts metadata from media
+ag xsltproc # this tool makes nice reports out of XML
+ag libssl-dev # A prereq. for many hacking utils and for metasploit
+ag libcurl4-openssl-dev libcurl4-nss-dev libflickcurl-dev  libcurl4-doc libcurl4   # LIB CURL

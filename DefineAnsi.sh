@@ -69,4 +69,68 @@ echo -e "${COLOR_RED}This is red text.${COLOR_RESET}"
 echo -e "${COLOR_BOLD_GREEN}This is bold green text.${COLOR_RESET}"
 
 
-and it will show ansi
+-------- 2NDARY METHOD -------------
+
+# Define ANSI color codes for text colors
+BLACK="\033[0;30m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[0;33m"
+BLUE="\033[0;34m"
+MAGENTA="\033[0;35m"
+CYAN="\033[0;36m"
+WHITE="\033[0;37m"
+
+# Define ANSI color codes for bright text colors
+BRIGHT_BLACK="\033[1;30m"
+BRIGHT_RED="\033[1;31m"
+BRIGHT_GREEN="\033[1;32m"
+BRIGHT_YELLOW="\033[1;33m"
+BRIGHT_BLUE="\033[1;34m"
+BRIGHT_MAGENTA="\033[1;35m"
+BRIGHT_CYAN="\033[1;36m"
+BRIGHT_WHITE="\033[1;37m"
+
+# Define ANSI color codes for background colors
+BG_BLACK="\033[0;40m"
+BG_RED="\033[0;41m"
+BG_GREEN="\033[0;42m"
+BG_YELLOW="\033[0;43m"
+BG_BLUE="\033[0;44m"
+BG_MAGENTA="\033[0;45m"
+BG_CYAN="\033[0;46m"
+BG_WHITE="\033[0;47m"
+
+# Define ANSI color codes for bright background colors
+BG_BRIGHT_BLACK="\033[1;40m"
+BG_BRIGHT_RED="\033[1;41m"
+BG_BRIGHT_GREEN="\033[1;42m"
+BG_BRIGHT_YELLOW="\033[1;43m"
+BG_BRIGHT_BLUE="\033[1;44m"
+BG_BRIGHT_MAGENTA="\033[1;45m"
+BG_BRIGHT_CYAN="\033[1;46m"
+BG_BRIGHT_WHITE="\033[1;47m"
+
+# Reset ANSI color code
+RESET="\033[0m"
+
+# Print color samples
+echo -e "${BLACK}Black Text${RESET} ${BG_BLACK}Black Background${RESET}"
+echo -e "${RED}Red Text${RESET} ${BG_RED}Red Background${RESET}"
+echo -e "${GREEN}Green Text${RESET} ${BG_GREEN}Green Background${RESET}"
+echo -e "${YELLOW}Yellow Text${RESET} ${BG_YELLOW}Yellow Background${RESET}"
+echo -e "${BLUE}Blue Text${RESET} ${BG_BLUE}Blue Background${RESET}"
+echo -e "${MAGENTA}Magenta Text${RESET} ${BG_MAGENTA}Magenta Background${RESET}"
+echo -e "${CYAN}Cyan Text${RESET} ${BG_CYAN}Cyan Background${RESET}"
+echo -e "${WHITE}White Text${RESET} ${BG_WHITE}White Background${RESET}"
+
+# Print bright color samples
+echo -e "${BRIGHT_BLACK}Bright Black Text${RESET} ${BG_BRIGHT_BLACK}Bright Black Background${RESET}"
+echo -e "${BRIGHT_RED}Bright Red Text${RESET} ${BG_BRIGHT_RED}Bright Red Background${RESET}"
+echo -e "${BRIGHT_GREEN}Bright Green Text${RESET} ${BG_BRIGHT_GREEN}Bright Green Background${RESET}"
+echo -e "${BRIGHT_YELLOW}Bright Yellow Text${RESET} ${BG_BRIGHT_YELLOW}Bright Yellow Background${RESET}"
+echo -e "${BRIGHT_BLUE}Bright Blue Text${RESET} ${BG_BRIGHT_BLUE}Bright Blue Background${RESET}"
+echo -e "${BRIGHT_MAGENTA}Bright Magenta Text${RESET} ${BG_BRIGHT_MAGENTA}Bright Magenta Background${RESET}"
+echo -e "${BRIGHT_CYAN}Bright Cyan Text${RESET} ${BG_BRIGHT_CYAN}Bright Cyan Background${RESET}"
+echo -e "${BRIGHT_WHITE}Bright White Text${RESET} ${BG_BRIGHT_WHITE}Bright White Background${RESET}"
+

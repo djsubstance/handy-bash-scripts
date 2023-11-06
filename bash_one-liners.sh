@@ -10,7 +10,7 @@ Try it with these options:
 httpx -l $1 -sc -cl -ct -location -jarm -td -lc -wc -title -server  -method -websocket -ip  -asn -cdn -probe -mc 200,201,202,203,204,301,302,303 -fc 403,404 -t 10 -pa -tls-probe -csp-probe -tls-grab -pipeline -http2 -vhost -tls-grab
 
 
-
+Extract all http/https links - sed -nE 's#.*(https?://[^[:space:]]+).*#\1#p' 
 
 curl -sLk 'https://searchcode.com/api/codesearch_I/?q=AWS_SECRET&lan=230&lan=22'| jq
 Prox() (curl 'https://www.codebeautify.com/URLService'   -H 'authority: www.codebeautify.com'   -H 'accept: */*'   -H 'accept-language: en-US,en;q=0.9'   -H 'cache-control: no-cache'   -H 'content-type: application/x-www-form-urlencoded'   -H 'dnt: 1'   -H 'origin: https://codebeautify.org'   -H 'pragma: no-cache'   -H 'referer: https://codebeautify.org/'   -H 'sec-ch-ua: "Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"'   -H 'sec-ch-ua-mobile: ?0'   -H 'sec-ch-ua-platform: "Windows"'   -H 'sec-fetch-dest: empty'   -H 'sec-fetch-mode: cors'   -H 'sec-fetch-site: cross-site'   -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'   --data-raw "path=https%3A%2F%2F$1" )

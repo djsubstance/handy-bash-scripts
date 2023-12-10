@@ -1,4 +1,10 @@
-# one liners worth lookgin at
+# This is a collection of mostly bash one lines or combinations of piped cmds not worth making a script of but worthy anyway
+################
+
+How to maintain ANSI while using jq | more:
+cat file.json | jq -C . | more -R
+
+
 Dope 9x prompt:
 export PS1='\e[1;30m[\e[1;37m9x\e[1;30m]\e[1;37m::\e[0;37m\][\[\e[1;30m\]\@\[\e[0;37m\]]\e[0;35m:\e[0;37m[\[\e[0;37m\
 ]\e[1;37m\w\[\e[0;37;40m\]]\n\[\e[0;37m\][\[\e[1;36m\]\u\[\e[1;30m\]@\[\e[1;36m\]\h\[\e[0;37m\]]\[\e[0m\]\$ '

@@ -1,3 +1,5 @@
+The background color is `#ffffff` for light mode and `#000000` for dark mode.
+
 # Regular Colors
 COLOR_BLACK="\e[30m"
 COLOR_RED="\e[31m"

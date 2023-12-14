@@ -1,3 +1,6 @@
+![9x - Spreading HP in the new milllenium](https://ckm-repairs.com/gfx/dal-purple-9x.png)
+
+
 Substances Collection of  
   _                                       _       _        
  | |             | |                     (_)     | |      

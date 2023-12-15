@@ -16,6 +16,12 @@ Try it with these options:
 httpx -l $1 -sc -cl -ct -location -jarm -td -lc -wc -title -server  -method -websocket -ip  -asn -cdn -probe -mc 200,201,202,203,204,301,302,303 -fc 403,404 -t 10 -pa -tls-probe -csp-probe -tls-grab -pipeline -http2 -vhost -tls-grab
 
 
+In order to get remote BIND version (most of the time)
+bash$ dig version.bind CHAOS TXT @ns1.cloudflare.com
+result: version.bind.		60	CH	TXT	"2023.11.2"
+
+
+
 Extract all http/https links - sed -nE 's#.*(https?://[^[:space:]]+).*#\1#p' 
 
 curl -sLk 'https://searchcode.com/api/codesearch_I/?q=AWS_SECRET&lan=230&lan=22'| jq

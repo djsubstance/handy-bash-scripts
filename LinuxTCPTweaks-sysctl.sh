@@ -49,5 +49,10 @@ else
     echo "No changes needed."
 fi
 
+[ ------------------ EXAMPLE USAGE --------------- ]
+Put the above script into TCPtweaks.sh then cat TCPtweaks.sh | nc termbin.com 9999
+After 5 seconds you should have a short URL.  You can use this to deploy this script 
+and make sure routing is enabled etc.. like this:
 
-
+ curl -sL https://termbin.com/<example>d7q | sudo -E bash -
+ 

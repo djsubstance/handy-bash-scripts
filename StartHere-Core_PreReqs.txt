@@ -15,3 +15,9 @@ ag exiftool # This tool extracts metadata from media
 ag xsltproc # this tool makes nice reports out of XML
 ag libssl-dev # A prereq. for many hacking utils and for metasploit
 ag libcurl4-openssl-dev libcurl4-nss-dev libflickcurl-dev  libcurl4-doc libcurl4   # LIB CURL
+
+
+
+------------------------ One Liners - useful to learn
+Get all links in nicelist.txt with wget:      while read -r url; do wget "$url"; done < nicelist.txt
+

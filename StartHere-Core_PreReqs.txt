@@ -21,3 +21,6 @@ ag libcurl4-openssl-dev libcurl4-nss-dev libflickcurl-dev  libcurl4-doc libcurl4
 ------------------------ One Liners - useful to learn
 Get all links in nicelist.txt with wget:      while read -r url; do wget "$url"; done < nicelist.txt
 
+------
+Write 10 bytes of random data to a file:      dd if=/dev/urandom of=landmark.tmfile bs=10 count=1
+

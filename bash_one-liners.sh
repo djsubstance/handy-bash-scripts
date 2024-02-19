@@ -1,5 +1,48 @@
 # This is a collection of mostly bash one lines or combinations of piped cmds not worth making a script of but worthy anyway
-################
+################### 
+
+       ░▒▓██████▓▒░  ░▒▓███████▓▒░  ░▒▓████████▓▒░       ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓███████▓▒░  ░▒▓████████▓▒░ ░▒▓███████▓▒░   ░▒▓███████▓▒░ 
+      ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░              ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        
+      ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░              ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        
+      ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░         ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░   ░▒▓███████▓▒░   ░▒▓██████▓▒░  
+      ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░              ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░        ░▒▓█▓▒░ 
+      ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░              ░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░        ░▒▓█▓▒░ 
+       ░▒▓██████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░       ░▒▓████████▓▒░ ░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓███████▓▒░  
+                                                                                                                                            
+                                                                                                                                
+created: sometime in 2022
+last update: 02/19/2024
+updated by substance
+
+Assumed or recommended prereq's:
+--------------------------------
+It is strongly recommended to apt-get install or brew install or yum install the following to have all the examples here work:
+a) hping3
+b) arp-scan/arp-fingerprint
+c) jq (this is also called json_pp)
+d) arp (Its in package called inetutils if you cant find it  thats a starting point)
+e) iptables / ipset
+f) nc - netcat  / socat2 (Socket Cat like netcat for sockets / SSL)
+g) All the core utils that come with a stock Ubuntu / RH system this includes
+  -  tr, troff, xargs, sed, awk, grep, egrep, echo, export, ls, more, less, for
+
+We will be doing a *ton* of "xargs" - if you dont know this command before you start down this git repo:
+a)  man xargs
+b)  man jq
+c)  The BUILTIN's (for, while) - 
+bash$ man while
+BUILTIN(1)                                                     General Commands Manual                                                     BUILTIN(1)
+
+NAME
+     builtin, !, %, ., :, @, [, {, }, alias, alloc, bg, bind, bindkey, break, breaksw, builtins, case, cd, chdir, command,
+     complete, continue, default, dirs, do, done, echo, echotc, elif, else, end, endif, endsw, esac, eval, exec, exit,
+     export, false, fc, fg, filetest, fi, for, foreach, getopts, glob, goto, hash, hashstat, history, hup, if, jobid, jobs,
+     kill, limit, local, log, login, logout, ls-F, nice, nohup, notify, onintr, popd, printenv, printf, pushd, pwd, read, 
+     readonly, rehash, repeat, return, sched, set, setenv, settc, setty, setvar, shift, source, stop, suspend, switch, 
+     telltc, test, then, time, times, trap, true, type, ulimit, umask, unalias, uncomplete, unhash, unlimit, unset, 
+     unsetenv, until, wait, where, which, while – shell built-in commands
+
+-
 
 How to maintain ANSI while using jq | more:
 cat file.json | jq -C . | more -R

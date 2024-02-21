@@ -1,0 +1,62 @@
+
+░▒▓███████▓▒░  ░▒▓████████▓▒░  ░▒▓██████▓▒░   ░▒▓██████▓▒░  ░▒▓███████▓▒░        ░▒▓███████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓██████▓▒░   ░▒▓███████▓▒░ ░▒▓████████▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░        
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░        
+░▒▓███████▓▒░  ░▒▓██████▓▒░   ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓███████▓▒░  ░▒▓████████▓▒░ ░▒▓████████▓▒░  ░▒▓██████▓▒░  ░▒▓██████▓▒░   
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░        
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░        ░▒▓█▓▒░ ░▒▓█▓▒░        
+░▒▓█▓▒░░▒▓█▓▒░ ░▒▓████████▓▒░  ░▒▓██████▓▒░   ░▒▓██████▓▒░  ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░        ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓███████▓▒░  ░▒▓████████▓▒░ 
+                                                                                                                                                            
+Prerequisites:
+--------------
+if you are on a macbook or OSX - you need to install HomeBrew - run (as user) /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+Best Advice - If you are building a pentest lab. Start fresh, reinstall.  If you want to go the extra step, make sure all file/dirs 
+in /var/log are appropriately permissioned and owned.
+Ensure root ownership and set restrictive permissions for sensitive logs:
+
+sh
+Copy code
+sudo chown root:root /var/log/*
+sudo chmod 600 /var/log/tallylog
+sudo chmod 600 /var/log/spooler
+sudo chmod 600 /var/log/secure
+sudo chmod 600 /var/log/messages
+sudo chmod 600 /var/log/maillog
+Adjust permissions for cloud-init logs (owned by root:adm, readable by group):
+
+sh
+Copy code
+sudo chown root:adm /var/log/cloud-init*.log
+sudo chmod 640 /var/log/cloud-init*.log
+Set permissions for btmp and wtmp (allowing read for other users can be useful for commands like last):
+
+If your files in /var/log and folders do not look writable, its possible they are screwed up. before
+doing any recon make sure you own box is set, and logging is critical:
+
+General / Generic Log CHMOD settings for Ubuntu/Centos - permissions - 
+sudo chown root:utmp /var/log/btmp /var/log/wtmp
+sudo chmod 664 /var/log/btmp /var/log/wtmp
+#Adjust ownership for service-specific directories (if httpd and php-fpm are used by these services, 
+#they might need specific permissions):
+
+sudo chown root:root /var/log/httpd
+sudo chmod 700 /var/log/httpd
+sudo chown apache:root /var/log/php-fpm
+sudo chmod 750 /var/log/php-fpm
+sudo chown root:systemd-journal /var/log/journal
+sudo chmod 2755 /var/log/journal
+sudo chown root:root /var/log/audit
+sudo chmod 700 /var/log/audit
+sudo chown chrony:chrony /var/log/chrony
+sudo chmod 750 /var/log/chrony
+
+In addition, this often comes up, when editting web files typically all markup and images:
+*.php, *.html, *.png, *.gif, etc *.js *.css - chmod 640 *.*
+error, dist, images - folders off web root - chmod 750 <folder name>
+Owner should typically be:  chown www-data: www-data ./index.php
+
+
+
+
+

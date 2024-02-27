@@ -1,0 +1,28 @@
+---------
+Handling low MEMORY ISSUES (BURP SUITE) : LOCKING UP MACHINE FROM OVER UTILiLZATIOM:
+(macOS) Intel
+To adjust the memory usage of Burp Suite Professional on macOS, including systems running macOS Sonoma with an Intel processor and 8GB of RAM, you'll need to modify the JVM options. This involves specifying the maximum heap size (-Xmx) that Java is allowed to allocate for Burp Suite, among possibly other parameters to optimize performance for your specific hardware configuration.
+
+Since macOS doesn't use a BurpSuiteVmOptions.txt file like Windows for specifying VM options, you'll typically adjust the memory settings for Burp Suite by modifying the command used to launch the application or by adjusting the settings of the application bundle directly.
+
+Method 1: Launching from the Command Line
+Open Terminal: You can find Terminal in the Applications > Utilities folder or by searching for it using Spotlight.
+
+Navigate to Burp Suite's Application: If you've installed Burp Suite in the Applications folder, you might first need to navigate to the application's package contents to find the executable JAR file.
+
+cd /Applications/Burp\ Suite\ Professional.app/Contents/java/app
+Run Burp Suite with Custom Memory Settings: Use the java command with the -Xmx option to specify the maximum heap size. For example, to allocate 4GB of RAM, you would use:
+
+java -Xmx6g -jar burpsuite_pro.jar
+Replace burpsuite_pro.jar with the actual name of the Burp Suite JAR file if it's different. Adjust the -Xmx value as needed for your system's capabilities and your requirements.
+
+Method 2: Modifying the Burp Suite Application Bundle
+To change how the Burp Suite Professional application launches from the Finder with adjusted memory settings, you'll need to edit its configuration files within the application bundle. This approach is more complex and requires careful editing:
+
+Navigate to the Application's Package Contents: Right-click (or Ctrl-click) on the Burp Suite Professional application in the Applications folder and select Show Package Contents.
+
+Find the Java Virtual Machine Options File: The location and name of the file you need to edit can vary. Look for a file named info.plist within the Contents folder.
+
+Edit the JVM Options: Open the info.plist file with a text editor (you might need administrative privileges to edit this file). Look for a section defining JVM options or arguments and add or modify the -Xmx parameter to set the desired maximum heap size. This step requires familiarity with the XML format and careful editing to avoid syntax errors.
+
+Save Your Changes: After adding the -Xmx parameter with the desired value (e.g., -Xmx4096m for 4GB), save the file and close the editor. You may need to restart your Mac for the changes to take effect fully.

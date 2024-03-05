@@ -1,0 +1,80 @@
+
+
+
+
+░▒▓███████▓▒░░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓███████▓▒░░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░  
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░     
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░     
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░     
+                                                                   
+                                                                   
+░▒▓███████▓▒░ ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░                     
+░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                     
+░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                     
+░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                     
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                     
+░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░                     
+░▒▓█▓▒░       ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓████████▓▒░              
+                                                                   
+                                                        
+Below is an example of an HAProxy configuration file that sets up HAProxy to listen on port 8888 on server 10.8.0.1, which also runs a Squid proxy instance on port 3128. 
+This configuration will distribute incoming requests to Squid proxies running on servers 10.8.0.1 through 10.8.0.9 on their respective interfaces, tun0,
+without requiring authentication.
+Each Squid proxy server is assumed to be listening on port 3128, except for the HAProxy server itself which hosts Squid on port 3128.
+** BIND THE PROXYS TO THE VPN TUN INTERFACE NOT 0.0.0.0
+
+Please ensure you have HAProxy installed on 10.8.0.1 before proceeding with this configuration. Adjust any specific settings as necessary for your environment.
+
+haproxy.conf
+# HAProxy configuration file example
+
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    daemon
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
+
+# Frontend configuration
+frontend http_front
+    bind *:8888
+    default_backend squid_backends
+
+# Backend configuration for Squid servers
+backend squid_backends
+    balance roundrobin
+    # Server running on the same machine as HAProxy, but on port 3128
+    server squid_local 10.8.0.1:3128 check
+    # Other Squid servers on tun0 interfaces
+    server squid2 10.8.0.2:3129 check
+    server squid3 10.8.0.3:3129 check
+    server squid4 10.8.0.4:3129 check
+    server squid5 10.8.0.5:3129 check
+    server squid6 10.8.0.6:3129 check
+    server squid7 10.8.0.7:3129 check
+    server squid8 10.8.0.8:3129 check
+    server squid9 10.8.0.9:3129 check
+
+
+------
+
+This configuration does a few key things:
+
+Global Settings: Configures global parameters for HAProxy, such as logging.
+Defaults: Sets default options for logging, HTTP mode, timeouts, and other parameters that apply to all frontend and backend sections unless overridden.
+Frontend Configuration: Defines a frontend named http_front that listens on all interfaces at port 8888 and forwards incoming requests to the squid_backends backend.
+Backend Configuration: Sets up a backend named squid_backends that distributes incoming requests among the Squid servers in a round-robin fashion. 
+The balance is done among the local Squid instance on 10.8.0.1:3128 and other Squid instances on 10.8.0.2 through 10.8.0.9, each listening on port 3128
+To apply this configuration, save it to the HAProxy configuration file (typically located at /etc/haproxy/haproxy.cfg), then restart HAProxy to apply the changes.
+Ensure you verify your HAProxy and Squid configurations for any potential errors or warnings before deploying into a production environment.
+

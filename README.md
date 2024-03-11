@@ -10,8 +10,11 @@
                           one nation :: underground
                                                                                                                                 
 created: sometime in 2022
-last update: 02/19/2024
+last update: 03/11/2024
 updated by substance
+
+HIGHLY recommended RFC's for your reading:
+https://datatracker.ietf.org/doc/html/rfc3986 -  Uniform Resource Identifier (URI): Generic Syntax
 
 Assumed or recommended prereq's:
 --------------------------------
@@ -29,10 +32,8 @@ We will be doing a *ton* of "xargs" - if you dont know this command before you s
 a)  man xargs
 b)  man jq
 c)  The BUILTIN's (for, while) - 
-bash$ man while
-BUILTIN(1)                                                     General Commands Manual                                                     BUILTIN(1)
 
-NAME
+Learn these basics:
      builtin, !, %, ., :, @, [, {, }, alias, alloc, bg, bind, bindkey, break, breaksw, builtins, case, cd, chdir, command,
      complete, continue, default, dirs, do, done, echo, echotc, elif, else, end, endif, endsw, esac, eval, exec, exit,
      export, false, fc, fg, filetest, fi, for, foreach, getopts, glob, goto, hash, hashstat, history, hup, if, jobid, jobs,
@@ -106,7 +107,48 @@ install.*						@127.0.0.1:32376
 echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}' | grep -Ev "($(openssl ciphers -v 'ALL:ALL' | grep -Ei "(gcm|pfs)" | grep -Ei "(ec|dhe)" | grep 256 | awk '{print "TLS_"$1}' | tr '-' '_' | tr '\n' '|' | head -c -1))"
  
 
+Essential one liners:
 
+             _     _                    _      
+            | |   | |                  | |     
+  _   _ _ __| | __| | ___  ___ ___   __| | ___ 
+ | | | | '__| |/ _` |/ _ \/ __/ _ \ / _` |/ _ \
+ | |_| | |  | | (_| |  __/ (_| (_) | (_| |  __/
+  \__,_|_|  |_|\__,_|\___|\___\___/ \__,_|\___|
+                                          
+BASH Functions: [the word function is not necessary but there for clarity]
+
+function urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
+
+[*] Example output:
+bash$ urldecode  "%02x-%02x-XX-XX0 00~%(i,i)] = render_template("  # random worthless input
+[*] OUTPUT - 00~x-x-XX-XX0 00~\x(i,i)] = render_template(
+bash: urldecode  "%20x-%02x-XX-XX0 00~%(i,i)] = render_template%20(%3cscript%3e" # NOTICE the space initially indicating its working
+[*] OUTPUT - " x-x-XX-XX0 00~\x(i,i)] = render_template (<script>"
+
+[*] Explained: 
+The substitution ${*//+/ } replaces all + characters with spaces in the input string, as + is often used to encode spaces in URLs. 
+This substitution is stored in the default variable _.
+The echo -e "${_//%/\\x}" part then processes percent-encoded characters. It replaces each % with \x, which echo -e interprets as 
+introducing a hexadecimal byte. The result is the original, URL-decoded string printed to stdout.
+
+        -------______________________________________~~~~~~~~~~~~~~~~~ [ URL-CODING ] -------______________________________________~~~~~~~~~~~~~~~~~
+
+
+             _                          _      
+            | |                        | |     
+  _   _ _ __| | ___ _ __   ___ ___   __| | ___ 
+ | | | | '__| |/ _ \ '_ \ / __/ _ \ / _` |/ _ \
+ | |_| | |  | |  __/ | | | (_| (_) | (_| |  __/
+  \__,_|_|  |_|\___|_| |_|\___\___/ \__,_|\___|
+    BASH Functions: [the word function is not necessary but there for clarity]
+
+Bash One-Liner to urlencode just the special chars:
+--------------------------------
+urlencode() { local string="${1}";  local strlen=${#string}; local encoded="";  local pos c o; for (( pos=0 ; pos<strlen ; pos++ ));   do c=${string:$pos:1}; case "$c" in [-_.~a-zA-Z0-9] )   o="${c}" ;; * )    printf -v o '%%%02x' "'$c";    esac; encoded+="${o}";     done;      echo "${encoded}"| sed 's/\./%2e/g';      }
+
+bash$ urlencode https://www.tranceattic.com
+[*] OUTPUT [*] https%3a%2f%2fwww%2etranceattic%2ecom
 
         ___
        __H__
@@ -114,7 +156,8 @@ echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}
 |_ -| . [(]     | .'| . |
 |___|_  [(]_|_|_|__,|  _|
       |_|V...       |_|   https://sqlmap.org
-               Running SQLMap - Various options I typically use:
+[*] Recommended options:
+
 sqlmap --url "https://tiatrue.com/admin.php?target=recover_password&valid=0" --dbms=mysql --random-agent --level 3 -a
 Note: The goal is to find a dynamic parameter or multiple and run sqlmap on that.  As seen above.
 
@@ -125,6 +168,7 @@ File	Permission (octal)	Permission (string)
    .ssh	700	drwx------
    id_rsa (private key)	400	r-------
    id_rsa_pub (public key)	644	rw-r-r-
+
 
 
 

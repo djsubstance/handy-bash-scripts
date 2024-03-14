@@ -1,6 +1,10 @@
 # Purpose: Checks to verify the most optimal TCP tweaks for your linux box are in place:
 #!/bin/bash
 
+# Deny users from seeing pid
+echo "proc /proc proc defaults,hidepid=2 0 0" | sudo tee -a /etc/fstab > /dev/null && sudo mount -o remount /proc && echo "done"
+
+
 CONFIG_FILE="/etc/sysctl.conf"
 NEED_UPDATE=0
 

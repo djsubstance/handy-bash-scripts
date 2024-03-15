@@ -85,6 +85,7 @@ dumpSrc() ( curl -s 'https://www.view-page-source.com/' -X POST -H 'User-Agent: 
 
 alias urls=" sed 's/http/\nhttp/g' | grep ^http | sed 's/\(^http[^<]*\)\(.*\)/\1/g'"
 
+d=$(date +%s%N)
 
 alias rmcr=" awk 'NF'" # Pipe this to remove any blank lines
 Example:

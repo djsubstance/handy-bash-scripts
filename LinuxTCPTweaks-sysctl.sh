@@ -8,6 +8,27 @@ echo "proc /proc proc defaults,hidepid=2 0 0" | sudo tee -a /etc/fstab > /dev/nu
 CONFIG_FILE="/etc/sysctl.conf"
 NEED_UPDATE=0
 
+fixLimits() {
+# Set ulimit values
+ulimit -c 0                    # Core file size
+ulimit -d unlimited            # Data seg size
+ulimit -e 0                    # Scheduling priority
+ulimit -f unlimited            # File size
+ulimit -i 1656                 # Pending signals
+ulimit -l 65536                # Max locked memory
+ulimit -m unlimited            # Max memory size
+ulimit -n 1024                 # Open files
+ulimit -p 8                    # Pipe size
+ulimit -q 819200               # POSIX message queues
+ulimit -r 0                    # Real-time priority
+ulimit -s 8192                 # Stack size
+ulimit -t unlimited            # CPU time
+ulimit -u 1656                 # Max user processes
+ulimit -v unlimited            # Virtual memory
+ulimit -x unlimited            # File locks
+echo "Set ulimit fix"
+}
+
 # Function to check if a setting exists in the configuration file
 check_setting() {
     local setting="$1"

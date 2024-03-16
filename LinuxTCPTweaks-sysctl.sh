@@ -1,8 +1,24 @@
+A namespace in Linux is a feature that partitions kernel resources so that one set of processes sees one
+set of resources, while another set of processes sees a different set of resources. The resources can
+include things like process IDs, hostnames, user IDs, file names, network access, and inter-process
+communication. Creating a namespace differs from creating a normal subinterface because the namespace 
+allows for the isolation of network environments, enabling you to have multiple instances of network 
+interfaces, routing tables, and firewalls, among others, running concurrently but isolated from each 
+other. This isolation makes namespaces a powerful tool for creating secure, containerized applications 
+or for testing network configurations without affecting the host system.
+
+
 # Purpose: Checks to verify the most optimal TCP tweaks for your linux box are in place:
 #!/bin/bash
 
-# Deny users from seeing pid
+# It is best to deny ICMP reply on all public interfaces / the next line will block users from seeing other pids
 echo "proc /proc proc defaults,hidepid=2 0 0" | sudo tee -a /etc/fstab > /dev/null && sudo mount -o remount /proc && echo "done"
+sudo sysctl -w net.ipv4.icmp_echo_ignore_all=1          # Disable ICMP echo (ping) replies for IPv4
+sudo sysctl -w net.ipv6.icmp.echo_ignore_all=1          # Disable ICMP echo (ping) replies for IPv6
+sudo sysctl -w net.ipv4.ip_forward=1                    # Enable IP forwarding for IPv4
+sudo sysctl -w net.ipv6.conf.all.forwarding=1           # Enable IP forwarding for IPv6
+
+
 
 
 CONFIG_FILE="/etc/sysctl.conf"

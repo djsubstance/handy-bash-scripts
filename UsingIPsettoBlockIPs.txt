@@ -1,0 +1,104 @@
+
+
+
+░▒▓█▓▒░ ▒▓███████▓▒░ ▒▓████████▓▒░▒▓██████▓▒░░▒▓███████▓▒░░▒▓█▓▒░      ░▒▓████████▓▒░░▒▓███████▓▒░ 
+░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░        
+░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░        
+░▒▓█▓▒░ ▒▓███████▓▒░   ░▒▓█▓▒░  ░▒▓████████▓▒░▒▓███████▓▒░░▒▓█▓▒░      ░▒▓██████▓▒░  ░▒▓██████▓▒░  
+░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░ 
+░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░ 
+░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░  ░▒▓█▓▒░░▒▓█▓▒░▒▓███████▓▒░░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░  
+
+is confusing and 
+
+░▒▓█▓▒░▒▓███████▓▒░ ░▒▓███████▓▒░▒▓████████▓▒░▒▓████████▓▒░ 
+░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░         ░▒▓█▓▒░     
+░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░         ░▒▓█▓▒░     
+░▒▓█▓▒░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓██████▓▒░    ░▒▓█▓▒░     
+░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
+░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
+░▒▓█▓▒░▒▓█▓▒░      ░▒▓███████▓▒░░▒▓████████▓▒░  ░▒▓█▓▒░     
+                                                            
+            can make your life and your firewall management of your linux box a peice of cake                                            
+                                                                                                
+What does ipset do: IPTables can be a nightmare if youve ever dealt with it, this allows you to make complex large rulesets
+and apply them to different groups and in different ways then typical.
+
+Prerequisites:
+--------------
+ apt-get update && apt-get upgrade && apt-get install ipset -y && apt-get install iptables-persistent -y && apt-get autoclean -y
+ # IPSet is required /  iptables-persistent is required if you want to save the rules
+ #  blockips.txt - a list of ips to block one per line
+
+[*] $ cat blockips.txt
+ 103.203.57.11
+ 104.152.52.89
+ 104.236.128.33
+ 104.236.194.175
+ 104.248.136.93
+ 104.248.43.137
+ 107.170.228.45
+ 107.170.232.19
+ 107.170.247.36
+ 110.42.248.198 
+   [Example IPS list can go on forever]
+
+
+[*] Populate the ipset DB:
+ while IFS= read -r ip; do     sudo ipset add bad_ips "$ip"; done < blockips.txt 
+
+[*] Push changes to IPTABLES
+ sudo iptables -I INPUT -m set --match-set bad_ips src -j DROP
+ # Note, if things are going to go wrong, now is the time
+
+
+ Hope this is helpful, now to verify type iptables -L
+ :[/var/log]
+[root@300baud]# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+DROP       all  --  anywhere             anywhere             match-set ** bad_ips *** src
+ACCEPT     udp  --  anywhere             anywhere             udp dpt:3318
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+DOCKER-USER  all  --  anywhere             anywhere            
+DOCKER-ISOLATION-STAGE-1  all  --  anywhere             anywhere            
+ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
+DOCKER     all  --  anywhere             anywhere            
+<SNIP> - We can see this dropping the "badips"
+
+Writing IPTables for persistance accross boots:
+GPT
+Saving iptables rules so they persist across reboots requires a bit of additional setup, which varies depending on your Linux 
+distribution.  
+
+Install iptables-service (if not already installed):
+
+sudo yum install iptables-services
+sudo systemctl enable iptables
+sudo systemctl start iptables
+
+Save the current rules to a filee
+sudo iptables-save > /etc/iptables.rules
+
+Restore iptables Rules on Boot:
+
+Create a script in /etc/network/if-pre-up.d/iptablesload (for systems that use if-up/if-down scripts)
+or another appropriate location for startup scripts, depending on your system's initialization system.
+Example script content:
+
+#!/bin/sh
+iptables-restore < /etc/iptables.rules
+exit 0
+Make sure the script is executable:
+sudo chmod +x /etc/network/if-pre-up.d/iptablesload
+
+
+or I just choose to do it simple:
+echo "sudo iptables-save > /etc/iptables.rules" > /sbin/writeIPT.sh
+chmod +x /sbin/writeIPT.sh
+writeIPT.sh \n
+[Saved]
+
+- Till next time

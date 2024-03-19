@@ -1,0 +1,112 @@
+filename: force-a2en-users.txt
+Purpose: make each user have a indepdant webdirectory in /~username
+
+In this example:
+uid: not 0
+username: subz
+homedir: /home/subz
+www homedir: /home/subz/public_html
+public addy: hxxps://0.0.0.0/~subz
+
+Step 1 to enable webdirs for each user: 
+Note: This takes configuration it doesnt happen just cause you create a user:
+
+ a2enmod
+Your choices are: access_compat actions alias allowmethods asis auth_basic auth_digest auth_form authn_anon authn_core  <snip> unique_id userdir usertrack vhost_alias xml2enc
+Which module(s) do you want to enable (wildcards ok)?
+-> userdir
+[*] Module userdir enabled
+
+
+code: 
+
+type  (as user)
+cd (enter or \n)
+>index.php \n
+vi index.php \n
+(inside the file)  <?php phpinfo(); ?>   ESC :wq (or in  vi/vim hit ESC Z Z  to save/quit)
+
+Check Permissions on Parent Directories:
+sudo chown -R www-data:www-data /home/subz/public_html/
+
+
+Make sure that the /home/subz/ directory and all parent directories leading up to it have the necessary search permissions for Apache. 
+The permissions for each directory in the path should be at least execute/search (x) for the user that Apache runs as (www-data on Ubuntu).
+
+You can check the permissions of the directories leading to /home/subz/public_html using the following command:
+
+ls -ld /home /home/subz /home/subz/public_html
+If any of the directories do not have the execute/search permission for the Apache user, you can add it using the chmod command:
+
+
+sudo chmod +x /home /home/subz
+Verify Ownership:
+Ensure that the directories /home, /home/subz, and /home/subz/public_html are owned by the correct user and group, typically root for
+/home and the user subz for the other directories.
+
+You can use the following command to verify ownership:
+
+ls -ld /home /home/subz /home/subz/public_html
+If the ownership is incorrect, you can change it using the chown command:
+
+sudo chown -R subz:subz /home/subz
+Restart Apache:
+After making these changes, restart Apache to apply the changes:
+
+
+sudo systemctl restart apache2
+By ensuring that Apache has the necessary search permissions on all components of the path leading to /home/subz/public_html, you should be
+able to resolve the "Permission denied" error and allow Apache to access the directory successfully.
+
+
+Test with: (make sure lynx is installed)
+lynx localhost/~subz
+
+You should see:
+                                                                                                                      Xdebug (p1 of 24)
+   PHP logo
+
+PHP Version 8.1.2-1ubuntu2.14
+
+   System Linux Vultr5 6.2.0-1018-aws #18~22.04.1-Ubuntu SMP Wed Jan 10 22:54:16 UTC 2024 x86_64
+   Build Date Aug 18 2023 11:41:11
+   Build System Linux
+   Server API Apache 2.0 Handler
+   Virtual Directory Support disabled
+   Configuration File (php.ini) Path /etc/php/8.1/apache2
+   Loaded Configuration File /etc/php/8.1/apache2/php.ini
+   Scan this dir for additional .ini files /etc/php/8.1/apache2/conf.d
+   Additional .ini files parsed /etc/php/8.1/apache2/conf.d/10-opcache.ini, /etc/php/8.1/apache2/conf.d/10-pdo.ini,
+   /etc/php/8.1/apache2/conf.d/20-calendar.ini, /etc/php/8.1/apache2/conf.d/20-ctype.ini,
+   /etc/php/8.1/apache2/conf.d/20-curl.ini, /etc/php/8.1/apache2/conf.d/20-exif.ini, /etc/php/8.1/apache2/conf.d/20-ffi.ini,
+   /etc/php/8.1/apache2/conf.d/20-fileinfo.ini, /etc/php/8.1/apache2/conf.d/20-ftp.ini,
+   /etc/php/8.1/apache2/conf.d/20-gettext.ini, /etc/php/8.1/apache2/conf.d/ <snip>
+
+   If you keep geting 403 forbidden
+   sudo nano /etc/apache2/sites-available/subz.conf
+Add Virtual Host Configuration:
+Paste the VirtualHost configuration you provided into this new file:
+
+* This goes in a independant file *
+ * Remember to keep restarting the service *
+  * Remember that apache2 defaults to all interfaces 80/443 to listen *
+  
+<VirtualHost *:80>
+    ServerName localhost
+    DocumentRoot /home/subz/public_html
+    <Directory /home/subz/public_html>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+
+:wq (write quit) / restart apache / try again
+
+If you are still having issues 
+tail -f /var/log/apache2/access.log
+
+
+This will tell you whats wrong
+hope this is helpful

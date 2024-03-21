@@ -169,6 +169,47 @@ File	Permission (octal)	Permission (string)
    id_rsa (private key)	400	r-------
    id_rsa_pub (public key)	644	rw-r-r-
 
+------- 
+
+[(SCREWED UP)] PASTING IN DARWIN CLI:
+░▒▓███████▓▒░  ░▒▓██████▓▒░  ░▒▓███████▓▒░▒▓████████▓▒░▒▓█▓▒░ ▒▓███████▓▒░  ░▒▓██████▓▒░  
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░        
+░▒▓███████▓▒░ ░▒▓████████▓▒░ ░▒▓██████▓▒░   ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒▒▓███▓▒░ 
+░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
+░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░ ▒▓███████▓▒░   ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░  
+                                                                                      
+ ░▒▓█▓▒░ ▒▓███████▓▒░                                                                   
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+ ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
+                                                                                  
+░▒▓███████▓▒░  ░▒▓██████▓▒░ ░▒▓███████▓▒░░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓███████▓▒░        
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓████████▓▒ ░▒▓███████▓▒░░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+░▒▓███████▓▒░ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█████████████▓▒░░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
+                                                                                      
+                                                                                    
+If you are using Darwin OSX command line and you are getting funky chars prefixing and appending to the paste:
+
+The characters [200~ and ~ that you're seeing when pasting into the terminal are known as "bracketed paste mode"
+markers. They're intended to let the terminal application know that a block of text is being pasted in, which 
+can change how the text is processed. However, not all terminal emulators handle this mode seamlessly, especially 
+when pasting commands that are expected to be executed immediately.
+
+Place this at the end of .bashrc for each local user -
+
+bind 'set enable-bracketed-paste off'
+
+What your facing is called "Bracketed Paste Mode"
+After running this command, try pasting your command again. 
 
 
 

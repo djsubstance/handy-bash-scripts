@@ -1,4 +1,4 @@
-[9x - Spreading HP in the new milllenium](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FmCCE0TRNukHhb576NF4VQ.jpeg)
+  [9x - Spreading HP in the new milllenium](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FmCCE0TRNukHhb576NF4VQ.jpeg)
 
 
 # This is a collection of mostly bash one lines or combinations of piped cmds not worth making a script of but worthy anyway
@@ -6,13 +6,9 @@
                           [ Shell Cmds for scripts or standalone ]  |_|            
                           Created by substance
                           Date Creation: Nov 2o22
-                          Date Modified: Feb 25th 2o24
+                          Date Modified: Mar 22nd 2o24
                           one nation :: underground
                                                                                                                                 
-created: sometime in 2022
-last update: 03/11/2024
-updated by substance
-
 HIGHLY recommended RFC's for your reading:
 https://datatracker.ietf.org/doc/html/rfc3986 -  Uniform Resource Identifier (URI): Generic Syntax
 
@@ -145,7 +141,15 @@ introducing a hexadecimal byte. The result is the original, URL-decoded string p
 
 Bash One-Liner to urlencode just the special chars:
 --------------------------------
-urlencode() { local string="${1}";  local strlen=${#string}; local encoded="";  local pos c o; for (( pos=0 ; pos<strlen ; pos++ ));   do c=${string:$pos:1}; case "$c" in [-_.~a-zA-Z0-9] )   o="${c}" ;; * )    printf -v o '%%%02x' "'$c";    esac; encoded+="${o}";     done;      echo "${encoded}"| sed 's/\./%2e/g';      }
+urlencode() { local string="${1}"; 
+local strlen=${#string};
+local encoded=""; 
+local pos c o; for (( pos=0 ; pos<strlen ; pos++ )); 
+do c=${string:$pos:1}; case "$c" in [-_.~a-zA-Z0-9] ) 
+o="${c}" ;; * )
+printf -v o '%%%02x' "'$c";    esac; e
+ncoded+="${o}";   
+done;      echo "${encoded}"| sed 's/\./%2e/g';      }
 
 bash$ urlencode https://www.tranceattic.com
 [*] OUTPUT [*] https%3a%2f%2fwww%2etranceattic%2ecom
@@ -170,33 +174,6 @@ File	Permission (octal)	Permission (string)
    id_rsa_pub (public key)	644	rw-r-r-
 
 ------- 
-
-[(SCREWED UP)] PASTING IN DARWIN CLI:
-░▒▓███████▓▒░  ░▒▓██████▓▒░  ░▒▓███████▓▒░▒▓████████▓▒░▒▓█▓▒░ ▒▓███████▓▒░  ░▒▓██████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░        
-░▒▓███████▓▒░ ░▒▓████████▓▒░ ░▒▓██████▓▒░   ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒▒▓███▓▒░ 
-░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░       ░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░       ░▒▓█▓▒░░▒▓█▓▒░ ▒▓███████▓▒░   ░▒▓█▓▒░   ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░ ░▒▓██████▓▒░  
-                                                                                      
- ░▒▓█▓▒░ ▒▓███████▓▒░                                                                   
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
- ░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░                                                                  
-                                                                                  
-░▒▓███████▓▒░  ░▒▓██████▓▒░ ░▒▓███████▓▒░░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓███████▓▒░        
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓████████▓▒ ░▒▓███████▓▒░░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-░▒▓███████▓▒░ ░▒▓█▓▒░░▒▓█▓▒ ░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█████████████▓▒░░ ▒▓█▓▒░ ▒▓█▓▒░░▒▓█▓▒░       
-                                                                                      
-                                                                                    
 If you are using Darwin OSX command line and you are getting funky chars prefixing and appending to the paste:
 
 The characters [200~ and ~ that you're seeing when pasting into the terminal are known as "bracketed paste mode"
@@ -210,6 +187,10 @@ bind 'set enable-bracketed-paste off'
 
 What your facing is called "Bracketed Paste Mode"
 After running this command, try pasting your command again. 
+----
 
+
+prefix https:// with ...  | sed 's/^/https:\/\/&/'
+In this command, your_command is a placeholder for whatever command you're using to generate the list of hostnames. The sedeplacement pattern refers to the entire portion of the pattern space that matched, which, in this case, is the start of the line, so nothing is actually being replaced—instead, https:// is being added before each line.
 
 

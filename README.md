@@ -1,4 +1,4 @@
-![9x - Spreading HP in the new milllenium](X)
+[9x - Spreading HP in the new milllenium](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*FmCCE0TRNukHhb576NF4VQ.jpeg)
 
 
 # This is a collection of mostly bash one lines or combinations of piped cmds not worth making a script of but worthy anyway

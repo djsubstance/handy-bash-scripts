@@ -11,7 +11,7 @@
                                                                                                                                             
                                                                                                                                 
 created: sometime in 2022
-last update: 02/19/2024
+last update: 03/23/2024
 updated by substance
 
 Assumed or recommended prereq's:
@@ -62,6 +62,10 @@ httpx -l $1 -sc -cl -ct -location -jarm -td -lc -wc -title -server  -method -web
 In order to get remote BIND version (most of the time)
 bash$ dig version.bind CHAOS TXT @ns1.cloudflare.com
 result: version.bind.		60	CH	TXT	"2023.11.2"
+
+
+Alias to "ghetto pretty print" json or .js or .jsx files  and display page by page
+alias qq=" tr ';' '\n' | tr ',' '\n'| more"
 
 
 
@@ -120,12 +124,4 @@ echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}
 
 
 
-        ___
-       __H__
- ___ ___[)]_____ ___ ___  {1.7.9.3#dev}
-|_ -| . [(]     | .'| . |
-|___|_  [(]_|_|_|__,|  _|
-      |_|V...       |_|   https://sqlmap.org
-               Running SQLMap - Various options I typically use:
-sqlmap --url "https://tiatrue.com/admin.php?target=recover_password&valid=0" --dbms=mysql --random-agent --level 3 -a
-Note: The goal is to find a dynamic parameter or multiple and run sqlmap on that.  As seen above.
+

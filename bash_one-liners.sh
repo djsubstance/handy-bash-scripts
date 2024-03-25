@@ -20,8 +20,8 @@ It is strongly recommended to apt-get install or brew install or yum install the
 a) hping3
 b) arp-scan/arp-fingerprint
 c) jq (this is also called json_pp)
-d) arp (Its in package called inetutils if you cant find it  thats a starting point)
 e) iptables / ipset
+d) arp (Its in package called inetutils if you cant find it  thats a starting point)
 f) nc - netcat  / socat2 (Socket Cat like netcat for sockets / SSL)
 g) All the core utils that come with a stock Ubuntu / RH system this includes
   -  tr, troff, xargs, sed, awk, grep, egrep, echo, export, ls, more, less, for
@@ -120,7 +120,14 @@ install.*						@127.0.0.1:32376
 
 # Identify what SSL TLS version is running on the remote hostname
 echo "" | openssl s_client -connect $1:443 2>&1 | grep Cipher | awk '{print $NF}' | grep -Ev "($(openssl ciphers -v 'ALL:ALL' | grep -Ei "(gcm|pfs)" | grep -Ei "(ec|dhe)" | grep 256 | awk '{print "TLS_"$1}' | tr '-' '_' | tr '\n' '|' | head -c -1))"
+
+Backup recursively current dir :
+ if curent dir is a mirror of google.com from a wget
+ save backup.googlecom.{epochtime}.tgz in ~
  
+function bkup() { local dirName=$(basename "$PWD" | sed 's/\./_/g'); tar -cvf ~/backup-"$dirName"-$(date +%s).tgz "$PWD"; }; alias bkup=bkup
+
+
 
 
 

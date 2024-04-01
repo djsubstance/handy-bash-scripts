@@ -1,0 +1,170 @@
+# JSlint.com Syntax Reference
+
+# Note: This is obviously public info you can probably find on JSLint.com but at times it helps to have a textfile reference. 
+  
+#!/usr/bin/env node
+/*jslint browser, node*/
+/*global caches, indexedDb*/
+import https from "https";
+import jslint from "./jslint.mjs";
+
+/*jslint-disable*/
+    JSLint will ignore and treat this region as blank-lines.
+    Syntax error.    
+/*jslint-enable*/
+
+eval("console.log(\"hello world\");"); //jslint-ignore-line
+
+// Optional directives.
+// .... /*jslint beta*/ .......... Enable experimental warnings.
+// .... /*jslint bitwise*/ ....... Allow bitwise operator.
+// .... /*jslint browser*/ ....... Assume browser environment.
+// .... /*jslint convert*/ ....... Allow conversion operator.
+// .... /*jslint couch*/ ......... Assume CouchDb environment.
+// .... /*jslint devel*/ ......... Allow console.log() and friends.
+// .... /*jslint eval*/ .......... Allow eval().
+// .... /*jslint fart*/ .......... Allow complex fat-arrow.
+// .... /*jslint for*/ ........... Allow for-statement.
+// .... /*jslint getset*/ ........ Allow get() and set().
+// .... /*jslint indent2*/ ....... Use 2-space indent.
+// .... /*jslint long*/ .......... Allow long lines.
+// .... /*jslint node*/ .......... Assume Node.js environment.
+// .... /*jslint nomen*/ ......... Allow weird property name.
+// .... /*jslint single*/ ........ Allow single-quote strings.
+// .... /*jslint subscript*/ ..... Allow identifier in subscript-notation.
+// .... /*jslint this*/ .......... Allow 'this'.
+// .... /*jslint trace*/ ......... Include jslint stack-trace in warnings.
+// .... /*jslint unordered*/ ..... Allow unordered cases, params, properties,
+// ................................... variables, and exports.
+// .... /*jslint white*/ ......... Allow messy whitespace.
+
+
+// jslint(source, option_dict, global_list) is a function that takes 3
+// arguments. The second two arguments are optional.
+
+//      source          A text to analyze.
+//      option_dict     An object whose keys correspond to option names.
+//      global_list     An array of strings containing global variables that
+//                      the file is allowed readonly access.
+
+// jslint returns an object containing its results. The object contains a lot
+// of valuable information. It can be used to generate reports. The object
+// contains:
+
+//      directives: an array of directive comment tokens.
+//      edition: the version of JSLint that did the analysis.
+//      exports: the names exported from the module.
+//      froms: an array of strings representing each of the imports.
+//      functions: an array of objects that represent all functions
+//              declared in the file.
+//      global: an object representing the global object. Its .context property
+//              is an object containing a property for each global variable.
+//      id: "(JSLint)"
+//      json: true if the file is a JSON text.
+//      lines: an array of strings, the source.
+//      module: true if an import or export statement was used.
+//      ok: true if no warnings were generated. This is what you want.
+//      option: the option argument.
+//      property: a property object.
+//      stop: true if JSLint was unable to finish. You don't want this.
+//      tokens: an array of objects representing the tokens in the file.
+//      tree: the token objects arranged in a tree.
+//      warnings: an array of warning objects. A warning object can contain:
+//          name: "JSLintError"
+//          column: A column number in the file.
+//          line: A line number in the file.
+//          code: A warning code string.
+//          message: The warning message string.
+//          a: Exhibit A.
+//          b: Exhibit B.
+//          c: Exhibit C.
+//          d: Exhibit D.
+
+// jslint works in several phases. In any of these phases, errors might be
+// found. Sometimes JSLint is able to recover from an error and continue
+// parsing. In some cases, it cannot and will stop early. If that should happen,
+// repair your code and try again.
+
+// Phases:
+
+// PHASE 1. Split <source> by newlines into <line_list>.
+// PHASE 2. Lex <line_list> into <token_list>.
+// PHASE 3. Parse <token_list> into <token_tree> using the Pratt-parser.
+// PHASE 4. Walk <token_tree>, traversing all nodes of the tree. It is a
+//          recursive traversal. Each node may be processed on the way down
+//          (preaction) and on the way up (postaction).
+// PHASE 5. Check whitespace between tokens in <token_list>.
+
+// jslint can also examine JSON text. It decides that a file is JSON text if
+// the first token is "[" or "{". Processing of JSON text is much simpler than
+// the processing of JavaScript programs. Only the first three phases are
+// required.
+
+// WARNING: JSLint will hurt your feelings.
+
+/*jslint beta, node*/
+/*property
+    JSLINT_BETA, NODE_V8_COVERAGE, a, all, argv, arity, artifact,
+    assertErrorThrownAsync, assertJsonEqual, assertOrThrow, assign, async, b,
+    beta, bitwise, block, body, browser, c, calls, catch, catch_list,
+    catch_stack, causes, char, children, clear, closer, closure, code, column,
+    concat, consoleError, console_error, console_log, constant, context,
+    convert, count, coverageDir, create, cwd, d, dead, debugInline, default,
+    delta, devel, directive, directive_ignore_line, directive_list, directives,
+    dirname, disrupt, dot, edition, elem_list, ellipsis, else, end, endOffset,
+    endsWith, entries, env, error, eval, every, example_list, excludeList, exec,
+    execArgv, exit, exitCode, export_dict, exports, expression, extra, fart,
+    file, fileList, fileURLToPath, filter, finally, flag, floor, for, forEach,
+    formatted_message, free, freeze, from, froms, fsWriteFileWithParents,
+    fud_stmt, functionName, function_list, function_stack, functions, get,
+    getset, github_repo, globExclude, global, global_dict, global_list,
+    holeList, htmlEscape, id, identifier, import, import_list, import_meta_url,
+    inc, includeList, indent2, index, indexOf, init, initial, isArray,
+    isBlockCoverage, isHole, isNaN, is_equal, is_weird, join, jslint,
+    jslint_apidoc, jslint_assert, jslint_charset_ascii, jslint_cli,
+    jslint_edition, jslint_phase1_split, jslint_phase2_lex, jslint_phase3_parse,
+    jslint_phase4_walk, jslint_phase5_whitage, jslint_report, json,
+    jstestDescribe, jstestIt, jstestOnExit, keys, label, lbp, led_infix, length,
+    level, line, lineList, line_list, line_offset, line_source, lines,
+    linesCovered, linesTotal, live, log, long, loop, m, map, margin, match, max,
+    message, meta, min, mkdir, modeCoverageIgnoreFile, modeIndex, mode_cli,
+    mode_conditional, mode_json, mode_module, mode_noop, mode_property,
+    mode_shebang, mode_stop, module, moduleFsInit, moduleName, module_list,
+    name, names, node, nomen, noop, now, nr, nud_prefix,
+    objectDeepCopyWithKeysSorted, ok, on, open, opening, option, option_dict,
+    order, package_name, padEnd, padStart, parameters, parent, parentIi, parse,
+    pathname, pathnameList, platform, pop, processArgv, process_argv,
+    process_env, process_exit, promises, property, property_dict, push, quote,
+    ranges, readFile, readdir, readonly, recursive, reduce, repeat, replace,
+    resolve, result, reverse, role, round, scriptId, search, set, shebang,
+    shift, signature, single, slice, some, sort, source, spawn, splice, split,
+    stack, stack_trace, start, startOffset, startsWith, statement,
+    statement_prv, stdio, stop, stop_at, stringify, subscript, switch,
+    syntax_dict, tenure, test, test_cause, test_internal_error, this, thru,
+    toLocaleString, toString, token, token_global, token_list, token_nxt,
+    token_tree, tokens, trace, tree, trim, trimEnd, trimRight, try, type,
+    unlink, unordered, unshift, url, used, v8CoverageListMerge,
+    v8CoverageReportCreate, value, variable, version, versions, warn, warn_at,
+    warning, warning_list, warnings, white, wrapped, writeFile
+*/
+
+
+
+await (async function () {
+    let result = await new Promise(function (resolve) {
+        https.request("https://www.jslint.com/jslint.mjs", function (res) {
+            result = "";
+            res.on("data", function (chunk) {
+                result += chunk;
+            }).on("end", function () {
+                resolve(result);
+            }).setEncoding("utf8");
+        }).end();
+    });
+    result = jslint.jslint(result);
+    result.warnings.forEach(function ({
+        formatted_message
+    }) {
+        console.error(formatted_message);
+    });
+}());

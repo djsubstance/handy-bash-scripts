@@ -11,8 +11,27 @@
                                                                                                                                             
                                                                                                                                 
 created: sometime in 2022
-last update: 03/23/2024
+last update: 04/08/2024
 updated by substance
+
+Latest Addition - using socat to redirect from a nonstandard TCP port -> port 80 (just an example)
+└─# sudo socat TCP-LISTEN:61636,reuseaddr,fork,transparent TCP:localhost:80
+      ^ In this example i hacked a box firewalled off from everything but port 61636, and needed to get onto the webserver I have running
+        on port 80 (apache).   By using this socat cmd (u may need to drop it to background with & ) I am greeted with:
+        
+lynx x.x.x.x:61636 (redirected me to x.x.x.x:80) and shows:
+Debian LogoApache2 Debian Default Page
+It works!
+This is the default welcome page used to test the correct operation of the Apache2 server after installation on Debian systems. 
+If you can read this page, it means that the Apache HTTP server installed at this site is working properly. You should replace 
+this file (located at /var/www/html/index.html) before continuing to operate your HTTP server.
+
+If you are a normal user of this web site and don't know what this page is about, this probably means that the site is currently
+unavailable due to maintenance. If the problem persists, please contact the site's administrator.
+
+yaydadyaya -  this is somewhat amazing to me that wwe can pull this stuff off, and the poss. are endless. 
+-----------
+
 
 Assumed or recommended prereq's:
 --------------------------------

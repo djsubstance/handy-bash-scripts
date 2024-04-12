@@ -146,7 +146,17 @@ Backup recursively current dir :
  
 function bkup() { local dirName=$(basename "$PWD" | sed 's/\./_/g'); tar -cvf ~/backup-"$dirName"-$(date +%s).tgz "$PWD"; }; alias bkup=bkup
 
+-----------
 
+sudo ls -l /proc/*/exe | awk '{print $8 " - PID: " substr($0, 7, index($0, "/exe") - 7)}'
+
+Example output:
+20:17 - PID: xrwx 1 root             root             0 Apr 11 20:17 /proc/909
+20:23 - PID: xrwx 1 root             root             0 Apr 11 20:23 /proc/91
+20:23 - PID: xrwx 1 root             root             0 Apr 11 20:23 /proc/92
+20:23 - PID: xrwx 1 root             root             0 Apr 11 20:23 /proc/925
+20:23 - PID: xrwx 1 root             root             0 Apr 11 20:23 /proc/93
+20:23 - PID: xrwx 1 root             root             0 Apr 11 20:23 /proc/937
 
 
 

@@ -35,3 +35,33 @@ export NEWT_COLORS='
     background=black      # General background
 '
 
+
+
+create a quick menu dialog:
+ CHOICE=$(whiptail --title "Advanced Menu with Custom Colors" --menu "Choose an option" 15 60 4 \
+"1" "Option 1: Basic Info" \
+"2" "Option 2: Configuration" \
+"3" "Option 3: Update System" \
+"4" "Option 4: Exit"  3>&1 1>&2 2>&3)
+
+
+
+                                                                                                                                                                    
+                                                                                                                                                                       
+                                                     ┌───────────┤ Advanced Menu with Custom Colors ├───────────┐                                                      
+                                                     │ Choose an option                                         │                                                      
+                                                     │                                                          │                                                      
+                                                     │                1 Option 1: Basic Info                    │                                                      
+                                                     │                2 Option 2: Configuration                 │                                                      
+                                                     │                3 Option 3: Update System                 │                                                      
+                                                     │                4 Option 4: Exit                          │                                                      
+                                                     │                                                          │                                                      
+                                                     │                                                          │                                                      
+                                                     │                                                          │                                                      
+                                                     │                                                          │                                                      
+                                                     │                                                          │                                                      
+                                                     │              <Ok>                  <Cancel>              │                                                      
+                                                     │                                                          │                                                      
+                                                     └──────────────────────────────────────────────────────────┘                                                      
+                                                                                                                                    
+                                                                                                                                    

@@ -6,7 +6,7 @@
                           [ Shell Cmds for scripts or standalone ]  |_|            
                           Created by substance
                           Date Creation: Nov 2o22
-                          Date Modified: Api 19 2o24
+                          Date Modified: Apr 19 2o24
                           one nation :: underground
                                                                                                                                 
 HIGHLY recommended RFC's for your reading:
@@ -193,4 +193,13 @@ After running this command, try pasting your command again.
 prefix https:// with ...  | sed 's/^/https:\/\/&/'
 In this command, your_command is a placeholder for whatever command you're using to generate the list of hostnames. The sedeplacement pattern refers to the entire portion of the pattern space that matched, which, in this case, is the start of the line, so nothing is actually being replaced—instead, https:// is being added before each line.
 
+-------------------------
+Locate php.ini using find/grep:
 
+bash$ find . | grep php.ini
+
+ php83 -m | grep xmlrpc
+xmlrpc
+[root@httpd]# php83 -m | grep xdebug
+
+xdebug

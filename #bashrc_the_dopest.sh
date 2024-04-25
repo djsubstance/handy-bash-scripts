@@ -54,5 +54,18 @@ bash$ cat ~/txt/*.txt | extract_url
  ---------
 
 
- Summary again without explaining:
- 
+ alias prse="tr ';' '\\n' | tr '|' '\\n' | tr '>' '\\n' | more"
+Using the Alias
+Once the alias is set up, you can pipe any command's output through prse to apply the transformations and paging. For example, using your curl command:
+
+bash
+Copy code
+curl "108.177.14.99" -sL | prse
+This command will execute the curl request, and then the output will be processed by replacing semicolons, pipes, and greater-than signs with new lines, making the output more readable and paginated with more.
+
+Explanation of the Alias Components:
+tr ';' '\\n': Translates all semicolons (;) into new lines (\n).
+tr '|' '\\n': Translates all pipe characters (|) into new lines.
+tr '>' '\\n': Translates all greater-than signs (>) into new lines.
+more: Uses the more command to paginate the output, allowing you to scroll through the transformed output one screen at a time.
+

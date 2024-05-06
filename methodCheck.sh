@@ -1,3 +1,5 @@
+#### DEPRECATED AS OF 05/05/24 - Look for MethodCheck2.sh for the best latest version
+#
 #  methodCheck.sh
 #  Purpose - check all possible URI and protocols for each method
 

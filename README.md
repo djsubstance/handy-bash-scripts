@@ -201,5 +201,11 @@ bash$ find . | grep php.ini
  php83 -m | grep xmlrpc
 xmlrpc
 [root@httpd]# php83 -m | grep xdebug
-
 xdebug
+
+
+--- [ Mounting Samba/SMB share from OSX (cli) -> Windows share ] ---
+mkdir /Volumes/c
+mount_smbfs //user:123@192.168.1.x/<sharename> /Volumes/c
+
+

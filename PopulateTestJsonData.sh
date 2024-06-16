@@ -1,0 +1,1 @@
+echo '{' > data.json; for i in {1..10}; do echo \"${i}\":\"Header for Accordion $i\", >> data.json; for j in {a..j}; do echo \"${i}${j}\":\"Content for ${i}${j}.\", >> data.json; done; done; sed -i '$ s/,$//' data.json; echo '}' >> data.json

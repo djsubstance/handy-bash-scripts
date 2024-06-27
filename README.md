@@ -209,3 +209,5 @@ mkdir /Volumes/c
 mount_smbfs //user:123@192.168.1.x/<sharename> /Volumes/c
 
 
+--- Display filename: content
+find . -type f -exec sh -c 'printf "Filename: %s\n" "$1"; cat "$1"; echo ""' _ {} \;

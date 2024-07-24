@@ -6,7 +6,7 @@
                           [ Shell Cmds for scripts or standalone ]  |_|            
                           Created by substance
                           Date Creation: Nov 2o22
-                          Date Modified: Apr 19 2o24
+                          Date Modified: Jul 2o24
                           one nation :: underground
                                                                                                                                 
 HIGHLY recommended RFC's for your reading:

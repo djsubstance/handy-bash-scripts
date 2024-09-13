@@ -53,3 +53,41 @@ spider_site() {
 # Usage: spider_site <domain.com>
 
 
+
+
+update:
+www () {
+    target_dir="./$1"
+    if [ ! -d "$target_dir" ]; then
+        mkdir -p "$target_dir"
+        echo "Directory $target_dir created."
+    else
+        echo "Directory $target_dir already exists."
+    fi
+    
+    echo "Press Enter to continue..."
+    read -r
+    wget --xattr "https://$1" \
+         --directory-prefix="$target_dir" \
+         -e robots=off \
+         --random-wait \
+         --wait=2 \
+         --user-agent="Mozilla/5.0" \
+         --recursive \
+         --cut-dirs=0 \
+         --no-parent \
+         --timestamping \
+         --mirror \
+         --no-remove-listing \
+         --adjust-extension \
+         --domains="$1" \
+         --page-requisites \
+         --convert-links \
+         --reject ".DS_Store,Thumbs.db,thumbcache.db,desktop.ini,_macosx" \
+         --server-response \
+         --no-host-directories \
+         --continue
+
+    echo "All files from $1 have been saved to $target_dir"
+}
+
